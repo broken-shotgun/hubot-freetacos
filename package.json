@@ -1,0 +1,29 @@
+{
+  "name": "hubot-freetacos",
+  "version": "1.0.0",
+  "author": "Broken Shotgun",
+  "keywords": [
+    "hubot",
+    "slack",
+    "tacos",
+    "karma"
+  ],
+  "bundleDependencies": false,
+  "dependencies": {
+    "clark": "0.0.6",
+    "coffee-script": "~1.6",
+    "underscore": ">= 1.0",
+    "hubot-slack": ">= 4.5.1"
+  },
+  "description": "A hubot script for giving free tacos",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/broken-shotgun/hubot-freetacos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/broken-shotgun/hubot-freetacos/issues"
+  },
+  "homepage": "https://github.com/broken-shotgun/hubot-freetacos#readme",
+  "main": "index.coffee",
+  "license": "MIT"
+}
