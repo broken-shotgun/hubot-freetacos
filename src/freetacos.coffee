@@ -156,6 +156,24 @@ module.exports = (robot) ->
         if score?
           res.send "<@#{id}> has #{score} :taco:"
 
+  # react/hearReaction is currently broken for hubot 3.x
+  # https://github.com/slackapi/hubot-slack/issues/537
+  robot.react (res) ->
+    # res.message is a ReactionMessage instance that represents the reaction Hubot just heard
+    if res.message.item_user != undefined
+      message_user_id = res.message.user.id
+      item_user_id = res.message.item_user.id
+      if res.message.type == "added"
+        if res.message.reaction == "taco"
+          res.send "<@#{message_user_id}> added taco reaction to <@#{item_user_id}>"
+        if res.message.reaction == "hankey"
+          res.send "<@#{message_user_id}> added poop reaction to <@#{item_user_id}>"
+      else if res.message.type == "removed"
+        if res.message.reaction == "taco"
+          res.send "<@#{message_user_id}> removed taco reaction from <@#{item_user_id}>"
+        if res.message.reaction == "hankey"
+          res.send "<@#{message_user_id}> removed poop reaction from <@#{item_user_id}>"
+
   robot.respond /(?:erase-tacos )/i, (res) ->
     from = res.message.user.id
     room = res.message.room
