@@ -8,8 +8,10 @@ Give (or take away) tacos from Slack users, all from the comfort of your persona
 API
 ---
 
-* `@name :taco:` - add a taco to `@name` (must be user)
-* `@name :poop:` - remove a taco from `@name` (must be user)
+* `@name :taco:` - add a taco (up to 5) to `@name` (must be user)
+* `@name :tacobell:` - add 5 tacos to `@name` (must be user)
+* `@name :poop:` - remove a taco (up to 5) from `@name` (must be user)
+* `@name :poop_fire:` - minus 5 tacos to `@name` (must be user)
 * `hubot erase-tacos @name` - erase tacos from scoreboard for `@name` (permanently deletes thing from memory)
 * `hubot top-tacos 10` - show the top 10, with a graph of taco counts
 * `hubot bottom-tacos 10` - show the bottom 10, with a graph of taco counts
