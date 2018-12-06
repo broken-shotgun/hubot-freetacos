@@ -158,7 +158,7 @@ module.exports = (robot) ->
 
   # react/hearReaction is currently broken for hubot 3.x
   # https://github.com/slackapi/hubot-slack/issues/537
-  robot.react (res) ->
+  robot.hearReaction (res) ->
     # res.message is a ReactionMessage instance that represents the reaction Hubot just heard
     if res.message.item_user != undefined
       message_user_id = res.message.user.id
