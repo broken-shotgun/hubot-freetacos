@@ -9,8 +9,10 @@
 # Configuration:
 #
 # Commands:
-#   @name :taco: - gives a taco to @name (limit 5 at a time, can mention multiple users)
-#   @name :poop: - removes a taco from @name (limit 5 at a time, can mention multiple users)
+#   @name :taco: - add a taco (up to 5) to @name (must be user)
+#   @name :tacobell: - add 5 tacos to @name (must be user)
+#   @name :poop: - remove a taco (up to 5) from @name (must be user)
+#   @name :poop_fire: - minus 5 tacos to @name (must be user)
 #   hubot tacos @name - give current taco count for @name
 #   hubot top-tacos <amount> - top <amount>
 #   hubot bottom-tacos <amount> - bottom <amount>
@@ -134,8 +136,9 @@ class ScoreKeeper
 
 module.exports = (robot) ->
   scoreKeeper = new ScoreKeeper(robot)
+  deltaMax = 5
 
-  robot.hear ///((?:\:taco\:\s{0,1}|\:poop\:\s{0,1}){1,5})///i, (res) ->
+  robot.hear ///((?:\:taco\:\s{0,1}|\:poop\:\s{0,1}){1,#{deltaMax}}|\:tacobell\:|\:poop_fire\:)///i, (res) ->
     operator = res.match[1]
     from = res.message.user.id
     room = res.message.room
@@ -147,10 +150,16 @@ module.exports = (robot) ->
     if user_mentions.length > 0
       # process each mention
       for { id } in user_mentions
-        score = if operator.includes(":taco:")
+        score = if operator.includes(":tacobell:")
+                  amount = deltaMax
+                  scoreKeeper.add(id, from, room, amount)
+                else if operator.includes(":poop_fire:")
+                  amount = deltaMax
+                  scoreKeeper.subtract(id, from, room, amount)
+                else if operator.includes(":taco:")
                   amount = operator.split(":taco:").length - 1
                   scoreKeeper.add(id, from, room, amount)
-                else
+                else if operator.includes(":poop:")
                   amount = operator.split(":poop:").length - 1
                   scoreKeeper.subtract(id, from, room, amount)
         if score?
