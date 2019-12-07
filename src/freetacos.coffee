@@ -171,14 +171,14 @@ module.exports = (robot) ->
       item_user_id = res.message.item_user.id
       if res.message.type == "added"
         if res.message.reaction == "taco"
-          res.send "<@#{message_user_id}> added taco reaction to <@#{item_user_id}>"
-        else if res.message.reaction == "hankey"
-          res.send "<@#{message_user_id}> added poop reaction to <@#{item_user_id}>"
+          @robot.logger.debug "<@#{message_user_id}> added :taco: reaction to <@#{item_user_id}>"
+        else if res.message.reaction == "poop"
+          @robot.logger.debug "<@#{message_user_id}> added :poop: reaction to <@#{item_user_id}>"
       else if res.message.type == "removed"
         if res.message.reaction == "taco"
-          res.send "<@#{message_user_id}> removed taco reaction from <@#{item_user_id}>"
-        else if res.message.reaction == "hankey"
-          res.send "<@#{message_user_id}> removed poop reaction from <@#{item_user_id}>"
+          @robot.logger.debug "<@#{message_user_id}> removed :taco: reaction from <@#{item_user_id}>"
+        else if res.message.reaction == "poop"
+          @robot.logger.debug "<@#{message_user_id}> removed :poop: reaction from <@#{item_user_id}>"
 
   robot.respond /(?:erase-tacos )/i, (res) ->
     from = res.message.user.id
