@@ -106,7 +106,7 @@ class ScoreKeeper
     messageIsSpam
 
   validate: (user, from) ->
-    user != from && user != "" && !@isSpam(user, from)
+    user != from && user != "" #&& !@isSpam(user, from)
 
   length: () ->
     @storage.log.length
@@ -164,6 +164,21 @@ module.exports = (robot) ->
                   scoreKeeper.subtract(id, from, room, amount)
         if score?
           res.send "<@#{id}> has #{score} :taco:"
+
+  robot.hearReaction (res) ->
+    if res.message.item_user != undefined
+      message_user_id = res.message.user.id
+      item_user_id = res.message.item_user.id
+      if res.message.type == "added"
+        if res.message.reaction == "taco"
+          @robot.logger.debug "<@#{message_user_id}> added :taco: reaction to <@#{item_user_id}>"
+        else if res.message.reaction == "poop"
+          @robot.logger.debug "<@#{message_user_id}> added :poop: reaction to <@#{item_user_id}>"
+      else if res.message.type == "removed"
+        if res.message.reaction == "taco"
+          @robot.logger.debug "<@#{message_user_id}> removed :taco: reaction from <@#{item_user_id}>"
+        else if res.message.reaction == "poop"
+          @robot.logger.debug "<@#{message_user_id}> removed :poop: reaction from <@#{item_user_id}>"
 
   robot.respond /(?:erase-tacos )/i, (res) ->
     from = res.message.user.id
