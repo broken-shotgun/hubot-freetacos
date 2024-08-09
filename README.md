@@ -8,6 +8,8 @@ Give (or take away) tacos from Slack users, all from the comfort of your persona
 API
 ---
 
+* `+:taco:` - add a taco from source of previous message
+* `+:poop:` - remove a taco from source of previous message
 * `@name :taco:` - add a taco (up to 5) to `@name` (must be user)
 * `@name :tacobell:` - add 5 tacos to `@name` (must be user)
 * `@name :poop:` - remove a taco (up to 5) from `@name` (must be user)
@@ -16,6 +18,8 @@ API
 * `hubot top-tacos 10` - show the top 10, with a graph of taco counts
 * `hubot bottom-tacos 10` - show the bottom 10, with a graph of taco counts
 * `hubot tacos @name` - check the taco count for `@name`
+
+New: added support for taco/poop reactions!
 
 Uses Hubot brain.
 
